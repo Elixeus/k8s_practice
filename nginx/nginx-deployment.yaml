@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment #(deployment level specs)
+metadata:
+  name: nginx-deployment
+  labels: # (deployment has its own label, used by Serivce)
+    app: nginx
+spec: #(blueprint of a deployment)
+  replicas: 1
+  selector:
+    matchLabels: #(select all labels that match nginx)
+      app: nginx
+  template: #(pod level specs)
+    metadata:
+      labels: #(create label)
+        app: nginx
+    spec: #(blueprint of a pod)
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        ports:
+        - containerPort: 8080
